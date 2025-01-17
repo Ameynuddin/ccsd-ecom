@@ -10,13 +10,13 @@ import java.util.List;
 public class DataInitializer {
     public final List<UserDTO> INITIAL_USERS = Arrays.asList(
             new UserDTO(
-                    "Zarin",
+                    "Admin12",
                     "admin@example.com",
                     "123456",
                     true
             ),
             new UserDTO(
-                    "Zaidi",
+                    "User13",
                     "user@example.com",
                     "123456",
                     false

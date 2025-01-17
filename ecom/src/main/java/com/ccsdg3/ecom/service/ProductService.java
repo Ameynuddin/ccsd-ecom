@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class ProductService {
     @Autowired
-    private ProductRepository productRepository;
+    private ProductRepository productRepository; // initialize repository
 
     public List<Product> findAll() {
         return productRepository.findAll();

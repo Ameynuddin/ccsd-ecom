@@ -1,4 +1,4 @@
-package com.ccsdg3.ecom.model;
+package com.ccsdg3.ecom.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,7 +7,7 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ShippingAddress {
+public class ShippingAddressDTO {
     private String fullName;
     private String address;
     private String city;

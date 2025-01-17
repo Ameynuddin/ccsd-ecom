@@ -1,18 +1,23 @@
 package com.ccsdg3.ecom.model;
 
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import java.util.Date;
 import java.util.List;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
-import lombok.Data;
 
 @Document(collection = "orders")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Order {
     @Id
     private String id;
-
     private List<OrderItem> orderItems;
     private ShippingAddress shippingAddress;
     private String paymentMethod;
@@ -25,10 +30,14 @@ public class Order {
     @DBRef
     private User user;
 
-    private boolean isPaid;
+    private boolean isPaid = false;
     private Date paidAt;
-    private boolean isDelivered;
+    private boolean isDelivered = false;
     private Date deliveredAt;
+
+    @CreatedDate
     private Date createdAt;
+
+    @LastModifiedDate
     private Date updatedAt;
 }

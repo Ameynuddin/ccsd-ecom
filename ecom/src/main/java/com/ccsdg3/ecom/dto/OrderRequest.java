@@ -1,13 +1,16 @@
 package com.ccsdg3.ecom.dto;
 
-import com.ccsdg3.ecom.model.ShippingAddress;
 import lombok.Data;
 import java.util.List;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class OrderRequest {
     private List<OrderItemRequest> orderItems;
-    private ShippingAddress shippingAddress;
+    private ShippingAddressDTO shippingAddress;
     private String paymentMethod;
     private Double itemsPrice;
     private Double shippingPrice;
