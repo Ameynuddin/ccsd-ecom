@@ -1,4 +1,17 @@
-package com.ccsdg3.ecom.controller;
+package com.ccsdg3.ecom.seeder;
+
+import com.ccsdg3.ecom.model.Product;
+import com.ccsdg3.ecom.model.User;
+import com.ccsdg3.ecom.repository.ProductRepository;
+import com.ccsdg3.ecom.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.event.EventListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
+import com.ccsdg3.ecom.dto.UserDTO;
+import com.ccsdg3.ecom.dto.ProductDTO;
 
 @Component
 @Slf4j
@@ -61,3 +74,4 @@ public class DatabaseSeeder {
         return product;
     }
 }
+

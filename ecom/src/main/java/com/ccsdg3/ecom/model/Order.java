@@ -1,5 +1,12 @@
 package com.ccsdg3.ecom.model;
 
+import java.util.Date;
+import java.util.List;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.mongodb.core.mapping.Document;
+import lombok.Data;
+
 @Document(collection = "orders")
 @Data
 public class Order {
@@ -22,39 +29,6 @@ public class Order {
     private Date paidAt;
     private boolean isDelivered;
     private Date deliveredAt;
-
-    @CreatedDate
     private Date createdAt;
-
-    @LastModifiedDate
     private Date updatedAt;
-}
-
-@Data
-public class OrderItem {
-    private String slug;
-    private String name;
-    private Integer quantity;
-    private String image;
-    private Double price;
-
-    @DBRef
-    private Product product;
-}
-
-@Data
-public class ShippingAddress {
-    private String fullName;
-    private String address;
-    private String city;
-    private String postalCode;
-    private String country;
-}
-
-@Data
-public class PaymentResult {
-    private String id;
-    private String status;
-    private String updateTime;
-    private String emailAddress;
 }
