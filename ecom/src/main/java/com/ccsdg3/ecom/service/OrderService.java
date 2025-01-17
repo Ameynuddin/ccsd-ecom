@@ -1,5 +1,18 @@
 package com.ccsdg3.ecom.service;
 
+import com.ccsdg3.ecom.model.Order;
+import com.ccsdg3.ecom.model.User;
+import com.ccsdg3.ecom.model.OrderItem;
+import com.ccsdg3.ecom.repository.OrderRepository;
+import com.ccsdg3.ecom.exception.ResourceNotFoundException;
+import com.ccsdg3.ecom.dto.OrderRequest;
+import com.ccsdg3.ecom.dto.PaymentResult;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import lombok.extern.slf4j.Slf4j;
+import java.util.List;
+import java.util.Date;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -24,32 +37,19 @@ public class OrderService {
     }
 
     public List<Order> getUserOrders(String userId) {
-        return orderRepository.findByUserId(userId);
+        return orderRepository.findByUserIdOrderByCreatedAtDesc(userId);
     }
 
-    public Optional<Order> getOrderById(String orderId) {
-        return orderRepository.findById(orderId);
+    public Order getOrderById(String orderId) {
+        return orderRepository.findById(orderId)
+                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
     }
 
     public Order updateOrderToPaid(String orderId, PaymentResult paymentResult) {
-        Order order = orderRepository.findById(orderId)
-                .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
-
+        Order order = getOrderById(orderId);
         order.setPaid(true);
         order.setPaidAt(new Date());
         order.setPaymentResult(paymentResult);
-
         return orderRepository.save(order);
-    }
-
-    private OrderItem mapToOrderItem(OrderItemRequest itemRequest) {
-        OrderItem item = new OrderItem();
-        item.setSlug(itemRequest.getSlug());
-        item.setName(itemRequest.getName());
-        item.setQuantity(itemRequest.getQuantity());
-        item.setImage(itemRequest.getImage());
-        item.setPrice(itemRequest.getPrice());
-        item.setProduct(new Product(itemRequest.getProductId()));
-        return item;
     }
 }

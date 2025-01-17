@@ -1,5 +1,14 @@
 package com.ccsdg3.ecom.controller;
 
+import com.ccsdg3.ecom.exception.ResourceNotFoundException;
+import com.ccsdg3.ecom.model.Product;
+import com.ccsdg3.ecom.service.ProductService;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import java.util.List;
+import org.springframework.http.ResponseEntity;
+
 @RestController
 @RequestMapping("/api/products")
 @Slf4j
@@ -8,18 +17,21 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping
-    public List<Product> getAllProducts() {
-        return productService.findAll();
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = productService.findAll();
+        return ResponseEntity.ok(products);
     }
 
     @GetMapping("/slug/{slug}")
-    public Product getProductBySlug(@PathVariable String slug) {
-        return productService.findBySlug(slug)
+    public ResponseEntity<Product> getProductBySlug(@PathVariable String slug) {
+        Product product = productService.findBySlug(slug)
                 .orElseThrow(() -> new ResourceNotFoundException("Product not found"));
+        return ResponseEntity.ok(product);
     }
 
     @GetMapping("/category/{category}")
-    public List<Product> getProductsByCategory(@PathVariable String category) {
-        return productService.findByCategory(category);
+    public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable String category) {
+        List<Product> products = productService.findByCategory(category);
+        return ResponseEntity.ok(products);
     }
 }
