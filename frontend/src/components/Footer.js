@@ -17,7 +17,7 @@ function Footer() {
                         <MDBRow className='mt-2'>
                             <MDBCol md='3' lg='4' xl='3' className='mx-auto mb-4'>
                                 <h5 className='text-uppercase mb-4'>
-                                    <MDBIcon color='secondary' icon='gem' className='me-3' />Hackashop
+                                    <MDBIcon color='secondary' icon='gem' className='me-3' />CCSD Ecom
                                 </h5>
                                 <p>
                                     Lorem ipsum dolor sit
@@ -81,7 +81,7 @@ function Footer() {
                                 </p>
                                 <p>
                                     <MDBIcon color='secondary' icon='envelope' className='me-3' />
-                                    services@hackashop.com
+                                    services@ccsdecom.com
                                 </p>
                                 <p>
                                     <MDBIcon color='secondary' icon='phone' className='me-3' />+601 234 5678
@@ -148,7 +148,7 @@ function Footer() {
                         floating
                         className='m-1'
                         style={{ backgroundColor: '#333333' }}
-                        href='https://github.com/Ameynuddin/hackashop'
+                        href='https://github.com/Ameynuddin/ccsd-ecom'
                         role='button'
                     >
                         <MDBIcon fab icon='github' />

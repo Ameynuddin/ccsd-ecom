@@ -45,7 +45,7 @@ export default function NavBar() {
                             height="30"
                         /></div>
                     <div>
-                        <span className="fw-bold">Hackashop</span>
+                        <span className="fw-bold">ShopSphere</span>
                     </div>
                 </MDBNavbarBrand>
 

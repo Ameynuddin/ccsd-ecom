@@ -34,4 +34,8 @@ public class ProductService {
                 .map(product -> product.getCategory())
                 .collect(Collectors.toSet());
     }
+
+    public Optional<Product> findById(String id) {
+        return productRepository.findById(id);
+    }
 }

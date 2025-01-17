@@ -6,7 +6,9 @@ import com.ccsdg3.ecom.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
 @RestController
@@ -33,5 +35,12 @@ public class ProductController {
     public ResponseEntity<List<Product>> getProductsByCategory(@PathVariable String category) {
         List<Product> products = productService.findByCategory(category);
         return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Product> getProductById(@PathVariable String id) {
+        return productService.findById(id)
+                .map(ResponseEntity::ok)
+                .orElseThrow(() -> new ResourceNotFoundException("Product not found with id: " + id));
     }
 }

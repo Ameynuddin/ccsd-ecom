@@ -15,8 +15,6 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 @Document(collection = "products")
 @Data
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Product {

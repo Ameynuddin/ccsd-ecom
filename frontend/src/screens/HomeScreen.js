@@ -57,7 +57,7 @@ function HomeScreen() {
     return (
         <>
             <Helmet>
-                <title>Hackashop</title>
+                <title>ShopSphere</title>
             </Helmet>
 
             <HomeCarousel />

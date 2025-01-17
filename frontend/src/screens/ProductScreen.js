@@ -54,6 +54,7 @@ function ProductScreen() {
     const { cart } = state;
     const addToCartHandler = async () => {
         const existItem = cart.cartItems.find((x) => x._id === product._id);
+        console.log('Adding product:', product);
         const quantity = existItem ? existItem.quantity + 1 : 1;
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/products/${product._id}`);
         if (data.countInStock < quantity) {
