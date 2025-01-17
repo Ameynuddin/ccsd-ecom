@@ -1,5 +1,7 @@
 package com.ccsdg3.ecom.dto;
 
+import lombok.Data;
+
 @Data
 public class SignUpRequest {
     private String name;

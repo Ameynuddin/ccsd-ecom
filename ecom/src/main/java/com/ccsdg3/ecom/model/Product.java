@@ -1,6 +1,9 @@
 package com.ccsdg3.ecom.model;
 
 import java.util.Date;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -10,6 +13,8 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 @Document(collection = "products")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Product {
     @Id
     private String id;
@@ -34,4 +39,8 @@ public class Product {
 
     @LastModifiedDate
     private Date updatedAt;
+
+    public Product(String id) {
+        this.id = id;
+    }
 }

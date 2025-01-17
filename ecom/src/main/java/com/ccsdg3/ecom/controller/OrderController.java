@@ -11,6 +11,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+import com.ccsdg3.ecom.dto.OrderResponse;
 
 @RestController
 @RequestMapping("/api/orders")
@@ -23,8 +24,8 @@ public class OrderController {
     public ResponseEntity<?> createOrder(@RequestBody OrderRequest orderRequest,
                                          @AuthenticationPrincipal UserDetails userDetails) {
         Order order = orderService.createOrder(orderRequest, userDetails.getUsername());
-        return ResponseEntity.status(HttpStatus.CREATED)
-                .body(new OrderResponse("New Order Created", order));
+        OrderResponse response = new OrderResponse("New Order Created", order);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/mine")
@@ -41,6 +42,7 @@ public class OrderController {
     public ResponseEntity<?> updateOrderToPaid(@PathVariable String id,
                                                @RequestBody PaymentResultDTO paymentResult) {
         Order updatedOrder = orderService.updateOrderToPaid(id, paymentResult);
-        return ResponseEntity.ok(new OrderResponse("Order Paid", updatedOrder));
+        OrderResponse response = new OrderResponse("Order Paid", updatedOrder);
+        return ResponseEntity.ok(response);
     }
 }

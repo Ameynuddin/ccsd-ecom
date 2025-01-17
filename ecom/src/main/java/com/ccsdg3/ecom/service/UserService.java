@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
+
 import java.util.Optional;
 
 @Service
@@ -35,7 +36,7 @@ public class UserService {
 
         String token = jwtUtils.generateToken(user);
         return new AuthResponse(user.getId(), user.getName(), user.getEmail(),
-                user.getIsAdmin(), token);
+                user.isAdmin(), token);  // Changed from getIsAdmin() to isAdmin()
     }
 
     public AuthResponse signUp(SignUpRequest request) {
@@ -51,6 +52,6 @@ public class UserService {
 
         String token = jwtUtils.generateToken(user);
         return new AuthResponse(user.getId(), user.getName(), user.getEmail(),
-                user.getIsAdmin(), token);
+                user.isAdmin(), token);
     }
 }

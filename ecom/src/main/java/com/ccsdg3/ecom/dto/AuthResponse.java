@@ -1,5 +1,8 @@
 package com.ccsdg3.ecom.dto;
 
+import lombok.Data;
+import lombok.AllArgsConstructor;
+
 @Data
 @AllArgsConstructor
 public class AuthResponse {

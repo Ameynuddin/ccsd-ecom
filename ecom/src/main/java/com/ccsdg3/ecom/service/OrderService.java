@@ -3,13 +3,17 @@ package com.ccsdg3.ecom.service;
 import com.ccsdg3.ecom.model.Order;
 import com.ccsdg3.ecom.model.User;
 import com.ccsdg3.ecom.model.OrderItem;
+import com.ccsdg3.ecom.model.Product;
+import com.ccsdg3.ecom.model.PaymentResult;
 import com.ccsdg3.ecom.repository.OrderRepository;
 import com.ccsdg3.ecom.exception.ResourceNotFoundException;
 import com.ccsdg3.ecom.dto.OrderRequest;
-import com.ccsdg3.ecom.dto.PaymentResult;
+import com.ccsdg3.ecom.dto.OrderItemRequest;
+import com.ccsdg3.ecom.dto.PaymentResultDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
+
 import java.util.List;
 import java.util.Date;
 import java.util.stream.Collectors;
@@ -45,11 +49,29 @@ public class OrderService {
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found"));
     }
 
-    public Order updateOrderToPaid(String orderId, PaymentResult paymentResult) {
+    public Order updateOrderToPaid(String orderId, PaymentResultDTO paymentResultDTO) {
         Order order = getOrderById(orderId);
         order.setPaid(true);
         order.setPaidAt(new Date());
+
+        PaymentResult paymentResult = new PaymentResult();
+        paymentResult.setId(paymentResultDTO.getId());
+        paymentResult.setStatus(paymentResultDTO.getStatus());
+        paymentResult.setUpdateTime(paymentResultDTO.getUpdateTime());
+        paymentResult.setEmailAddress(paymentResultDTO.getEmailAddress());
+
         order.setPaymentResult(paymentResult);
         return orderRepository.save(order);
+    }
+
+    private OrderItem mapToOrderItem(OrderItemRequest itemRequest) {
+        OrderItem item = new OrderItem();
+        item.setSlug(itemRequest.getSlug());
+        item.setName(itemRequest.getName());
+        item.setQuantity(itemRequest.getQuantity());
+        item.setImage(itemRequest.getImage());
+        item.setPrice(itemRequest.getPrice());
+        item.setProduct(new Product(itemRequest.getProductId()));
+        return item;
     }
 }
