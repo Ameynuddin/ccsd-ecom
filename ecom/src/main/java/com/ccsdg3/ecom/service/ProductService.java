@@ -31,7 +31,7 @@ public class ProductService {
 
     public Set<String> getAllCategories() {
         return productRepository.findAll().stream()
-                .map(Product::getCategory)
+                .map(product -> product.getCategory())
                 .collect(Collectors.toSet());
     }
 }

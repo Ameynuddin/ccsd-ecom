@@ -5,11 +5,13 @@ import com.ccsdg3.ecom.model.User;
 import com.ccsdg3.ecom.model.OrderItem;
 import com.ccsdg3.ecom.model.Product;
 import com.ccsdg3.ecom.model.PaymentResult;
+import com.ccsdg3.ecom.model.ShippingAddress;
 import com.ccsdg3.ecom.repository.OrderRepository;
 import com.ccsdg3.ecom.exception.ResourceNotFoundException;
 import com.ccsdg3.ecom.dto.OrderRequest;
 import com.ccsdg3.ecom.dto.OrderItemRequest;
 import com.ccsdg3.ecom.dto.PaymentResultDTO;
+import com.ccsdg3.ecom.dto.ShippingAddressDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import lombok.extern.slf4j.Slf4j;
@@ -29,13 +31,24 @@ public class OrderService {
         order.setOrderItems(request.getOrderItems().stream()
                 .map(this::mapToOrderItem)
                 .collect(Collectors.toList()));
-        order.setShippingAddress(request.getShippingAddress());
+
+        ShippingAddress shippingAddress = new ShippingAddress();
+        ShippingAddressDTO shipDTO = request.getShippingAddress();
+        shippingAddress.setFullName(shipDTO.getFullName());
+        shippingAddress.setAddress(shipDTO.getAddress());
+        shippingAddress.setCity(shipDTO.getCity());
+        shippingAddress.setPostalCode(shipDTO.getPostalCode());
+        shippingAddress.setCountry(shipDTO.getCountry());
+
+        order.setShippingAddress(shippingAddress);
         order.setPaymentMethod(request.getPaymentMethod());
         order.setItemsPrice(request.getItemsPrice());
         order.setShippingPrice(request.getShippingPrice());
         order.setTaxPrice(request.getTaxPrice());
         order.setTotalPrice(request.getTotalPrice());
         order.setUser(new User(userId));
+        order.setPaid(false);
+        order.setDelivered(false);
 
         return orderRepository.save(order);
     }
